@@ -1,7 +1,7 @@
 (function(){
   const chordPattern = /\[([A-G][#b]?(?:m|maj|min|sus|dim|aug|add|\d|\+|\-|\/|[A-G#b])*)\]/g;
-  const cuePattern = /^\s*(?:\{)?(?:Вступление|Проигрыш|Соло|Кода|Концовка|Бридж|Intro|Break|Outro|Bridge)(?:\})?\s*:/i;
-  const sectionPattern = /^\s*(?:\{)?(?:Куплет|Припев|Verse|Chorus)(?:\s*\d+|\s*\d+\s*раза)?(?:\})?\s*:?\s*$/i;
+  const cuePattern = /^\s*(?:\{)?(?:Вступление|Проигрыш|Соло|Кода|Концовка|Бридж|Intro|Break|Outro|Bridge)(?:\s*\([^)]*\))?(?:\})?\s*:/i;
+  const sectionPattern = /^\s*(?:\{)?(?:Куплет|Припев|Предприпев|Пред-припев|Постприпев|Verse|Chorus)(?:\s*\d+)?(?:\s*\([^)]*\))?(?:\})?\s*:?\s*$/i;
   function renderChart(chart, transpose, esc, tr){
     let number=0;
     const chord=c=>`<button type="button" class="chord" data-chord="${number++}" title="Нажмите, чтобы изменить аккорд">${esc(tr(c,transpose))}</button>`;
