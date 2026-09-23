@@ -9,6 +9,13 @@
     const isChordOnly=line=>{const t=tokens(line);return t.length>0&&!line.replace(chordPattern,'').trim()};
     const plain=line=>esc(line).replace(chordPattern,(_,c)=>chord(c));
     function segments(lyrics, found, positions){
+      positions=positions.map(position=>{
+        let p=Math.max(0,Math.min(position,lyrics.length));
+        if(p<lyrics.length&&p>0&&!/\s/.test(lyrics[p])&&!/\s/.test(lyrics[p-1])){
+          while(p>0&&!/\s/.test(lyrics[p-1]))p--;
+        }
+        return p;
+      });
       let html='<div class="chart-pair">';
       if(positions[0]>0)html+=`<span class="chart-segment"><span class="chart-above">&nbsp;</span><span class="chart-lyric">${esc(lyrics.slice(0,positions[0]))}</span></span>`;
       for(let k=0;k<found.length;k++){
